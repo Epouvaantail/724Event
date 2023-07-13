@@ -12,7 +12,11 @@ const Slider = () => {
   );
   const nextCard = () => {
     if (byDateDesc && byDateDesc.length > 0) {
-      setTimeout(() => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0), 5000);
+      // ajout de -1 à la length
+      setTimeout(
+        () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
+        5000
+      );
     };
   };
   useEffect(() => {
@@ -21,8 +25,10 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
+        // ajout d'une div pour avoir des key différentes suivant la slide
         <div key={`${idx+1}`}>
           <div
+          // suppression de la key dans cette div
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -40,10 +46,12 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
+                // ajout de +1 aux bullet point
                   key={`${radioIdx + 1}`}
                   type="radio"
                   name="radio-button"
                   checked={index === radioIdx}
+                  // ajout de onchange
                   onChange={() => setIndex(radioIdx)}
                 />
               ))}
